@@ -11,3 +11,38 @@ The contributions of this work are the following:
 Details about this work can be found in my report, available in this GitHub repository.
 
 The *EmoSurv* dataset in available on IEEE website and must be used according to the license granted by its authors: https://ieee-dataport.org/open-access/emosurv-typing-biometric-keystroke-dynamics-dataset-emotion-labels-created-using
+
+## Deployment
+
+### Frontend (React)
+The React frontend is automatically deployed to GitHub Pages when code is pushed to the master branch.
+
+**Live URL:** https://ngq1.github.io/keystroke-dynamics-cognitive-burden/
+
+### Backend (Flask)
+The Flask backend requires separate hosting since GitHub Pages only supports static sites. Recommended hosting options:
+
+1. **Heroku** (Free tier available)
+2. **Railway** (Free tier available)
+3. **Render** (Free tier available)
+4. **PythonAnywhere** (Free tier available)
+
+#### Quick Deploy to Railway:
+1. Go to [Railway.app](https://railway.app)
+2. Connect your GitHub account
+3. Deploy the `keystroke-data-collector/backend` folder
+4. Update the frontend API calls to use the Railway URL
+
+### Local Development
+To run locally:
+```bash
+# Backend
+cd keystroke-data-collector/backend
+pip install -r requirements.txt
+python app.py
+
+# Frontend
+cd keystroke-data-collector/frontend
+npm install
+npm start
+```
