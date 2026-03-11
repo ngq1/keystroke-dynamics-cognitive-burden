@@ -1,0 +1,108 @@
+[
+  {
+    "userId": "user_1773138855712_4aelrj8cz",
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773131731.878297",
+    "cognitiveLoadLevel": "low",
+    "labels": {
+      "inducedCognitiveLoad": "low",
+      "perceivedCognitiveLoad": "low",
+      "performanceLevel": "poor",
+      "taskComplexityScore": 20,
+      "cognitiveLoadAlignment": "aligned",
+      "overallBurdenLabel": "moderate-burden",
+      "metrics": {
+        "typingAccuracy": "17.83",
+        "errorRate": "82.17",
+        "wordsPerMinute": "8.68",
+        "secondaryTaskAccuracy": 0,
+        "consistencyScore": 75
+      },
+      "nasaTLXScore": "27.67",
+      "timestamp": "2026-03-10T10:50:09.486Z"
+    },
+    "validationReport": {
+      "isValid": false,
+      "alignment": "aligned",
+      "performanceLevel": "poor",
+      "nasaTLXScore": "27.67",
+      "taskComplexity": 20,
+      "issues": [
+        "Performance degradation detected"
+      ],
+      "recommendations": []
+    },
+    "timestamp": "2026-03-10T10:51:50.456Z",
+    "created_at": "2026-03-10T10:51:51.036986"
+  },
+  {
+    "userId": "user_1773138855712_4aelrj8cz",
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773132711.836671",
+    "cognitiveLoadLevel": "medium",
+    "labels": {
+      "inducedCognitiveLoad": "medium",
+      "perceivedCognitiveLoad": "medium",
+      "performanceLevel": "poor",
+      "taskComplexityScore": 50,
+      "cognitiveLoadAlignment": "aligned",
+      "overallBurdenLabel": "moderate-burden",
+      "metrics": {
+        "typingAccuracy": "12.86",
+        "errorRate": "87.14",
+        "wordsPerMinute": "9.08",
+        "secondaryTaskAccuracy": 0,
+        "consistencyScore": 75
+      },
+      "nasaTLXScore": "35.67",
+      "timestamp": "2026-03-10T11:08:40.516Z"
+    },
+    "validationReport": {
+      "isValid": false,
+      "alignment": "aligned",
+      "performanceLevel": "poor",
+      "nasaTLXScore": "35.67",
+      "taskComplexity": 50,
+      "issues": [
+        "Performance degradation detected"
+      ],
+      "recommendations": []
+    },
+    "timestamp": "2026-03-10T11:09:02.824Z",
+    "created_at": "2026-03-10T11:09:03.168022"
+  },
+  {
+    "userId": "user_1773138855712_4aelrj8cz",
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773133743.690242",
+    "cognitiveLoadLevel": "high",
+    "labels": {
+      "inducedCognitiveLoad": "high",
+      "perceivedCognitiveLoad": "medium",
+      "performanceLevel": "poor",
+      "taskComplexityScore": 85,
+      "cognitiveLoadAlignment": "under-perceived",
+      "overallBurdenLabel": "moderate-burden",
+      "metrics": {
+        "typingAccuracy": "20.32",
+        "errorRate": "79.68",
+        "wordsPerMinute": "10.13",
+        "secondaryTaskAccuracy": "0.00",
+        "consistencyScore": 75
+      },
+      "nasaTLXScore": "40.17",
+      "timestamp": "2026-03-10T11:27:29.765Z"
+    },
+    "validationReport": {
+      "isValid": false,
+      "alignment": "under-perceived",
+      "performanceLevel": "poor",
+      "nasaTLXScore": "40.17",
+      "taskComplexity": 85,
+      "issues": [
+        "Load perception mismatch: Induced high but perceived as medium",
+        "Performance degradation detected"
+      ],
+      "recommendations": []
+    },
+    "timestamp": "2026-03-10T11:27:57.439Z",
+    "created_at": "2026-03-10T11:27:57.779287"
+  }
+]

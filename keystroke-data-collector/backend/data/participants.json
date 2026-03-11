@@ -1,0 +1,119 @@
+{
+  "testuser1": {
+    "userId": "testuser1",
+    "age": "25",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-03T11:58:02.244694"
+  },
+  "testuser2": {
+    "userId": "testuser2",
+    "age": "18",
+    "gender": "Male",
+    "educationLevel": "High School",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-03T12:10:03.124663"
+  },
+  "USER_1764764890837_406": {
+    "userId": "USER_1764764890837_406",
+    "age": "29",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-03T12:29:17.635353"
+  },
+  "USER_1764765079711_515": {
+    "userId": "USER_1764765079711_515",
+    "age": "26",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-03T12:31:56.926824"
+  },
+  "USER_1764765874903_604": {
+    "userId": "USER_1764765874903_604",
+    "age": "18",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-03T12:45:20.680941"
+  },
+  "USER_1765469146731_325": {
+    "userId": "USER_1765469146731_325",
+    "age": "23",
+    "gender": "Male",
+    "educationLevel": "High School",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2025-12-11T16:20:53.507683"
+  },
+  "user_1768991628821_9rky0r1kl": {
+    "userId": "user_1768991628821_9rky0r1kl",
+    "age": "26",
+    "gender": "Female",
+    "educationLevel": "Master",
+    "typingHabits": "Frequently",
+    "professionalTyping": false,
+    "created_at": "2026-01-21T10:38:48.852369"
+  },
+  "user_1768992518820_76l62abxe": {
+    "userId": "user_1768992518820_76l62abxe",
+    "age": "19",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2026-01-21T10:49:21.111983"
+  },
+  "user_1768993085198_k3e01hdx1": {
+    "userId": "user_1768993085198_k3e01hdx1",
+    "age": "19",
+    "gender": "Female",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2026-01-21T10:58:36.329335"
+  },
+  "user_1768996319386_qe4vxghuf": {
+    "userId": "user_1768996319386_qe4vxghuf",
+    "age": "13",
+    "gender": "Female",
+    "educationLevel": "High School",
+    "typingHabits": "Rarely",
+    "professionalTyping": false,
+    "created_at": "2026-01-21T11:53:15.687692"
+  },
+  "user_1772646053126_64rk2gnl7": {
+    "userId": "user_1772646053126_64rk2gnl7",
+    "age": "20",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2026-03-04T17:41:31.007024"
+  },
+  "user_1772650823754_dtbtz40ir": {
+    "userId": "user_1772650823754_dtbtz40ir",
+    "age": "24",
+    "gender": "Female",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2026-03-04T19:01:15.126853"
+  },
+  "user_1773138855712_4aelrj8cz": {
+    "userId": "user_1773138855712_4aelrj8cz",
+    "age": "22",
+    "gender": "Male",
+    "educationLevel": "Bachelor",
+    "typingHabits": "Occasionally",
+    "professionalTyping": false,
+    "created_at": "2026-03-10T10:35:31.220919"
+  }
+}

@@ -1,0 +1,222 @@
+[
+  {
+    "sessionId": "testuser1_session_1764755882.580705",
+    "userId": "testuser1",
+    "mentalDemand": 0,
+    "physicalDemand": 0,
+    "temporalDemand": 0,
+    "performance": 77,
+    "effort": 0,
+    "frustration": 0,
+    "created_at": "2025-12-03T12:00:32.846048"
+  },
+  {
+    "sessionId": "testuser2_session_1764756603.46013",
+    "userId": "testuser2",
+    "mentalDemand": 0,
+    "physicalDemand": 0,
+    "temporalDemand": 0,
+    "performance": 98,
+    "effort": 0,
+    "frustration": 0,
+    "created_at": "2025-12-03T12:11:36.747565"
+  },
+  {
+    "sessionId": "USER_1764764890837_406_session_1764757757.98064",
+    "userId": "USER_1764764890837_406",
+    "mentalDemand": 0,
+    "physicalDemand": 0,
+    "temporalDemand": 0,
+    "performance": 50,
+    "effort": 0,
+    "frustration": 0,
+    "created_at": "2025-12-03T12:31:14.244046"
+  },
+  {
+    "sessionId": "USER_1764765079711_515_session_1764757917.275326",
+    "userId": "USER_1764765079711_515",
+    "mentalDemand": 50,
+    "physicalDemand": 50,
+    "temporalDemand": 50,
+    "performance": 50,
+    "effort": 50,
+    "frustration": 50,
+    "created_at": "2025-12-03T12:34:12.852765"
+  },
+  {
+    "sessionId": "USER_1764765874903_604_session_1764758721.027966",
+    "userId": "USER_1764765874903_604",
+    "mentalDemand": 0,
+    "physicalDemand": 0,
+    "temporalDemand": 0,
+    "performance": 95,
+    "effort": 0,
+    "frustration": 0,
+    "created_at": "2025-12-03T12:47:10.092260"
+  },
+  {
+    "sessionId": "USER_1764765874903_604_session_1764758830.440143",
+    "userId": "USER_1764765874903_604",
+    "mentalDemand": 30,
+    "physicalDemand": 10,
+    "temporalDemand": 10,
+    "performance": 95,
+    "effort": 20,
+    "frustration": 0,
+    "created_at": "2025-12-03T12:49:36.224149"
+  },
+  {
+    "sessionId": "USER_1764765874903_604_session_1764758976.572153",
+    "userId": "USER_1764765874903_604",
+    "mentalDemand": 50,
+    "physicalDemand": 10,
+    "temporalDemand": 20,
+    "performance": 95,
+    "effort": 30,
+    "frustration": 10,
+    "created_at": "2025-12-03T12:52:44.521010"
+  },
+  {
+    "sessionId": "USER_1765469146731_325_session_1765462853.839382",
+    "userId": "USER_1765469146731_325",
+    "mentalDemand": 10,
+    "physicalDemand": 10,
+    "temporalDemand": 30,
+    "performance": 80,
+    "effort": 10,
+    "frustration": 10,
+    "created_at": "2025-12-11T16:23:36.336214"
+  },
+  {
+    "sessionId": "USER_1765469146731_325_session_1765463016.661792",
+    "userId": "USER_1765469146731_325",
+    "mentalDemand": 50,
+    "physicalDemand": 50,
+    "temporalDemand": 50,
+    "performance": 50,
+    "effort": 50,
+    "frustration": 50,
+    "created_at": "2025-12-11T16:25:19.260605"
+  },
+  {
+    "sessionId": "USER_1765469146731_325_session_1765463119.60197",
+    "userId": "USER_1765469146731_325",
+    "mentalDemand": 50,
+    "physicalDemand": 50,
+    "temporalDemand": 50,
+    "performance": 50,
+    "effort": 50,
+    "frustration": 50,
+    "created_at": "2025-12-11T16:26:48.791002"
+  },
+  {
+    "sessionId": "user_1768991628821_9rky0r1kl_session_1768984729.219069",
+    "userId": "user_1768991628821_9rky0r1kl",
+    "mentalDemand": 9,
+    "physicalDemand": 10,
+    "temporalDemand": 15,
+    "performance": 95,
+    "effort": 10,
+    "frustration": 7,
+    "created_at": "2026-01-21T10:40:59.970547"
+  },
+  {
+    "sessionId": "user_1768993085198_k3e01hdx1_session_1768985916.680812",
+    "userId": "user_1768993085198_k3e01hdx1",
+    "mentalDemand": 14,
+    "physicalDemand": 12,
+    "temporalDemand": 17,
+    "performance": 86,
+    "effort": 12,
+    "frustration": 12,
+    "created_at": "2026-01-21T11:00:04.100883"
+  },
+  {
+    "sessionId": "user_1768993085198_k3e01hdx1_session_1768986004.735949",
+    "userId": "user_1768993085198_k3e01hdx1",
+    "mentalDemand": 17,
+    "physicalDemand": 11,
+    "temporalDemand": 11,
+    "performance": 81,
+    "effort": 17,
+    "frustration": 8,
+    "created_at": "2026-01-21T11:01:38.797267"
+  },
+  {
+    "sessionId": "user_1768993085198_k3e01hdx1_session_1768986099.44607",
+    "userId": "user_1768993085198_k3e01hdx1",
+    "mentalDemand": 16,
+    "physicalDemand": 22,
+    "temporalDemand": 25,
+    "performance": 79,
+    "effort": 15,
+    "frustration": 15,
+    "created_at": "2026-01-21T11:02:55.012892"
+  },
+  {
+    "sessionId": "user_1772646053126_64rk2gnl7_session_1772638891.673663",
+    "userId": "user_1772646053126_64rk2gnl7",
+    "mentalDemand": 20,
+    "physicalDemand": 20,
+    "temporalDemand": 35,
+    "performance": 75,
+    "effort": 30,
+    "frustration": 30,
+    "created_at": "2026-03-04T17:55:25.292996"
+  },
+  {
+    "sessionId": "user_1772646053126_64rk2gnl7_session_1772639726.099115",
+    "userId": "user_1772646053126_64rk2gnl7",
+    "mentalDemand": 20,
+    "physicalDemand": 25,
+    "temporalDemand": 35,
+    "performance": 71,
+    "effort": 29,
+    "frustration": 29,
+    "created_at": "2026-03-04T17:58:33.580791"
+  },
+  {
+    "sessionId": "user_1772646053126_64rk2gnl7_session_1772639914.152315",
+    "userId": "user_1772646053126_64rk2gnl7",
+    "mentalDemand": 40,
+    "physicalDemand": 29,
+    "temporalDemand": 39,
+    "performance": 64,
+    "effort": 38,
+    "frustration": 30,
+    "created_at": "2026-03-04T18:40:04.696065"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773131731.878297",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 18,
+    "physicalDemand": 8,
+    "temporalDemand": 25,
+    "performance": 79,
+    "effort": 17,
+    "frustration": 19,
+    "created_at": "2026-03-10T10:50:09.411372"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773132711.836671",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 34,
+    "physicalDemand": 18,
+    "temporalDemand": 37,
+    "performance": 75,
+    "effort": 34,
+    "frustration": 16,
+    "created_at": "2026-03-10T11:08:40.413084"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773133743.690242",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 27,
+    "physicalDemand": 32,
+    "temporalDemand": 40,
+    "performance": 61,
+    "effort": 37,
+    "frustration": 44,
+    "created_at": "2026-03-10T11:27:29.664371"
+  }
+]

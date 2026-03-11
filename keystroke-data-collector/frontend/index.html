@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keystroke Dynamics Data Collector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 150px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .slider-group {
+            margin-bottom: 2rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            padding: 0;
+        }
+
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-card h4 {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .step-indicator {
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Keystroke Dynamics Data Collector</h1>
+        <p>Cognitive Burden Detection</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="messageBox"></div>
+
+            <!-- Step 1: Participant Registration -->
+            <div id="step1" class="step">
+                <h2>Step 1: Participant Information</h2>
+                <p>Please provide your demographic information</p>
+
+                <form id="participantForm">
+                    <div class="form-group">
+                        <label for="userId">User ID (Auto-generated)</label>
+                        <input type="text" id="userId" required placeholder="Auto-generated on form load" readonly style="background-color: #f5f5f5; cursor: not-allowed;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="Enter your age" min="18" max="120">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="educationLevel">Education Level</label>
+                        <select id="educationLevel">
+                            <option value="">Select education level</option>
+                            <option value="High School">High School</option>
+                            <option value="Bachelor">Bachelor</option>
+                            <option value="Master">Master</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="typingHabits">Typical Typing Usage</label>
+                        <select id="typingHabits">
+                            <option value="">Select typing habits</option>
+                            <option value="Rarely">Rarely (less than 1 hour/day)</option>
+                            <option value="Occasionally">Occasionally (1-3 hours/day)</option>
+                            <option value="Frequently">Frequently (3-6 hours/day)</option>
+                            <option value="Very Frequently">Very Frequently (more than 6 hours/day)</option>
+                        </select>
+                    </div>
+
+                    <div style="background-color: #e3f2fd; padding: 1rem; border-radius: 5px; margin: 1rem 0; border-left: 4px solid #2196f3;">
+                        <h4 style="margin-top: 0; color: #1976d2;">📋 Study Protocol</h4>
+                        <p style="margin: 0; color: #555;">You will complete <strong>three typing tasks</strong> with different cognitive load levels:</p>
+                        <ol style="margin: 0.5rem 0 0 1.2rem; color: #555;">
+                            <li><strong>Low:</strong> Simple typing (baseline)</li>
+                            <li><strong>Medium:</strong> Typing + memory task</li>
+                            <li><strong>High:</strong> Typing + logic puzzle</li>
+                        </ol>
+                        <p style="margin: 0.5rem 0 0 0; color: #555; font-size: 0.9rem;"><em>Each task takes about 2-3 minutes. Total time: ~10 minutes.</em></p>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Start First Task (Low Load)</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Typing Task -->
+            <div id="step2" class="step hidden">
+                <div id="taskProgress" style="background-color: #f8f9fa; padding: 0.75rem; border-radius: 5px; margin-bottom: 1rem; text-align: center; border: 2px solid #667eea;">
+                    <strong style="color: #667eea;">Task <span id="currentTaskNumber">1</span> of 3:</strong> 
+                    <span id="currentTaskLabel" style="color: #333;">Low Load (Baseline)</span>
+                </div>
+                <h2>Typing Task</h2>
+                <p id="taskDescription">Type the text below exactly as shown</p>
+
+                <!-- Dual-Task Display Area -->
+                <div id="dualTaskArea" class="hidden" style="background-color: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem; border-left: 4px solid #ffc107;">
+                    <h3 style="margin-top: 0; color: #856404; font-size: 1rem;">📋 Secondary Task</h3>
+                    <div id="dualTaskContent" style="font-size: 1.1rem; font-weight: bold; color: #856404;"></div>
+                    <div id="dualTaskAnswer" class="form-group" style="margin-top: 1rem;">
+                        <label for="dualTaskInput" style="color: #856404;">Answer (complete after typing):</label>
+                        <input type="text" id="dualTaskInput" placeholder="Enter your answer here" style="border-color: #ffc107;">
+                    </div>
+                </div>
+
+                <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 5px; margin-bottom: 1.5rem; border-left: 4px solid #667eea;">
+                    <h3 style="margin-top: 0; color: #333;">Text to Type:</h3>
+                    <p id="promptText" style="font-size: 1.1rem; color: #555; line-height: 1.6; margin: 0;"></p>
+                </div>
+
+                <form id="typingForm">
+                    <div class="form-group">
+                        <label for="typingInput">Your Text:</label>
+                        <textarea id="typingInput" placeholder="Click here and start typing..." autofocus></textarea>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Accuracy</h4>
+                            <div class="stat-value" id="accuracy">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>WPM</h4>
+                            <div class="stat-value" id="wpm">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Duration</h4>
+                            <div class="stat-value" id="duration">0s</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Keystrokes</h4>
+                            <div class="stat-value" id="keystrokeCount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn-primary" onclick="clearTyping()">Clear & Reset</button>
+                        <button type="submit" class="btn-primary">Submit & Continue</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: NASA-TLX -->
+            <div id="step3" class="step hidden">
+                <h2>Step 3: Cognitive Load Assessment (NASA-TLX)</h2>
+                <p>Please rate the typing task you just completed</p>
+
+                <form id="nasaTLXForm">
+                    <div class="form-group">
+                        <label for="mentalDemand"><strong>Mental Demand</strong> - How mentally demanding was the task? (0-100)</label>
+                        <input type="number" id="mentalDemand" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Very Low, 100 = Very High</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="physicalDemand"><strong>Physical Demand</strong> - How physically demanding was the task? (0-100)</label>
+                        <input type="number" id="physicalDemand" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Very Low, 100 = Very High</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="temporalDemand"><strong>Temporal Demand</strong> - How hurried or rushed was the pace? (0-100)</label>
+                        <input type="number" id="temporalDemand" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Very Low, 100 = Very High</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="performance"><strong>Performance</strong> - How successful were you? (0-100)</label>
+                        <input type="number" id="performance" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Failure, 100 = Perfect</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="effort"><strong>Effort</strong> - How hard did you have to work? (0-100)</label>
+                        <input type="number" id="effort" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Very Low, 100 = Very High</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="frustration"><strong>Frustration</strong> - How frustrated were you? (0-100)</label>
+                        <input type="number" id="frustration" min="0" max="100" value="50" required onchange="updateOverallScore()">
+                        <small style="color: #666; font-size: 0.85rem;">0 = Very Low, 100 = Very High</small>
+                    </div>
+
+                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border: 1px solid #667eea;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #667eea;">Overall Cognitive Load Score</h4>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;" id="overallScore">50 / 100</div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Complete & View Summary</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 4: Summary -->
+            <div id="step4" class="step hidden">
+                <div style="font-size: 3rem; color: #28a745; text-align: center; margin-bottom: 1rem;">✓</div>
+                <h2 style="text-align: center; color: #28a745; margin-top: 0;">All Tasks Complete!</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 2rem;">Thank you for completing all three cognitive load tasks</p>
+
+                <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 5px; margin-bottom: 1.5rem;">
+                    <h3 style="color: #667eea; margin-top: 0;">Completed Tasks Summary</h3>
+                    <div id="summaryContent"></div>
+                    <div id="allTasksSummary" style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <h4 style="margin-top: 0; color: #333;">All Sessions:</h4>
+                        <ul id="tasksList" style="list-style: none; padding: 0;"></ul>
+                    </div>
+                </div>
+                
+                <div style="background: #d4edda; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border-left: 4px solid #28a745;">
+                    <strong style="color: #155724;">✓ Data Automatically Exported</strong>
+                    <p style="margin: 0.5rem 0 0 0; color: #155724; font-size: 0.9rem;">Your data has been saved to CSV file in the backend exports folder.</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-primary" onclick="resetApp()">Start New Session</button>
+                </div>
+
+                <p style="text-align: center; color: #999; font-size: 0.9rem; margin-top: 1.5rem;">
+                    Your data has been securely stored. Session ID: <span id="summarySessionId"></span>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="step-indicator">Step <span id="stepNumber">1</span> of 4</div>
+    </footer>
+
+    <script>
+        // Constants
+        const API_BASE = 'http://localhost:5000/api';
+        const TYPING_PROMPTS = [
+            "The quick brown fox jumps over the lazy dog.",
+            "Emotion recognition through keystroke dynamics is an emerging field.",
+            "Your typing pattern can reveal insights about your emotional and cognitive state.",
+            "Practice makes perfect, but nobody's perfect, so why practice?",
+            "The early bird catches the worm, but the second mouse gets the cheese."
+        ];
+
+        // State
+        let currentStep = 1;
+        let participantData = {};
+        let sessionData = {};
+        let typingStartTime = null;
+        let keystrokes = [];
+        let typingPrompt = '';
+        let cognitiveLoadLevel = 'Low';
+        let dualTaskData = {};
+        
+        // Multi-task session tracking
+        const TASK_SEQUENCE = ['Low', 'Medium', 'High'];
+        let currentTaskIndex = 0;
+        let completedSessions = [];
+
+        // Dual-task generators
+        function generateNumberSequence() {
+            const length = 6;
+            const numbers = [];
+            for (let i = 0; i < length; i++) {
+                numbers.push(Math.floor(Math.random() * 10));
+            }
+            return numbers.join('');
+        }
+
+        function generateLogicPuzzle() {
+            const puzzles = [
+                { question: "If A=1, B=2, C=3, what is the sum of 'CAB'?", answer: "6" },
+                { question: "What number comes next? 2, 4, 8, 16, __", answer: "32" },
+                { question: "If 5 apples cost $10, how much do 3 apples cost?", answer: "6" },
+                { question: "How many vowels are in 'COGNITIVE BURDEN'?", answer: "6" },
+                { question: "What is 15% of 200?", answer: "30" },
+                { question: "If today is Wednesday, what day is 10 days from now?", answer: "Saturday" },
+                { question: "How many letters are in the word 'KEYSTROKE'?", answer: "9" },
+                { question: "What is 7 × 8 - 10?", answer: "46" }
+            ];
+            return puzzles[Math.floor(Math.random() * puzzles.length)];
+        }
+
+        function setupDualTask(level) {
+            const dualTaskArea = document.getElementById('dualTaskArea');
+            const dualTaskContent = document.getElementById('dualTaskContent');
+            const taskDescription = document.getElementById('taskDescription');
+            
+            if (level === 'Low') {
+                dualTaskArea.classList.add('hidden');
+                taskDescription.textContent = 'Type the text below exactly as shown';
+                dualTaskData = { type: 'none', data: null, answer: null };
+            } else if (level === 'Medium') {
+                dualTaskArea.classList.remove('hidden');
+                taskDescription.textContent = 'Type the text while remembering the number sequence';
+                const sequence = generateNumberSequence();
+                dualTaskContent.innerHTML = `<strong>Remember this sequence:</strong> ${sequence}`;
+                dualTaskData = { type: 'number_sequence', data: sequence, answer: null };
+            } else if (level === 'High') {
+                dualTaskArea.classList.remove('hidden');
+                taskDescription.textContent = 'Type the text while solving this logic puzzle';
+                const puzzle = generateLogicPuzzle();
+                dualTaskContent.innerHTML = `<strong>Solve:</strong> ${puzzle.question}`;
+                dualTaskData = { type: 'logic_puzzle', data: puzzle.question, correctAnswer: puzzle.answer, answer: null };
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate unique user ID
+            generateUserId();
+            
+            typingPrompt = TYPING_PROMPTS[Math.floor(Math.random() * TYPING_PROMPTS.length)];
+            document.getElementById('promptText').textContent = typingPrompt;
+
+            // Form listeners
+            document.getElementById('participantForm').addEventListener('submit', handleParticipantSubmit);
+            document.getElementById('typingForm').addEventListener('submit', handleTypingSubmit);
+            document.getElementById('nasaTLXForm').addEventListener('submit', handleNasaTLXSubmit);
+
+            // Typing listeners
+            const typingInput = document.getElementById('typingInput');
+            typingInput.addEventListener('keydown', handleKeyDown);
+            typingInput.addEventListener('keyup', handleKeyUp);
+            typingInput.addEventListener('input', updateTypingStats);
+        });
+
+        function generateUserId() {
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            const userId = `USER_${timestamp}_${random}`;
+            document.getElementById('userId').value = userId;
+        }
+
+        function showMessage(text, isError = false) {
+            const msgBox = document.getElementById('messageBox');
+            msgBox.innerHTML = `<div class="message ${isError ? 'error' : 'success'}">${text}</div>`;
+            setTimeout(() => msgBox.innerHTML = '', 5000);
+        }
+
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            document.getElementById('stepNumber').textContent = step;
+            currentStep = step;
+            window.scrollTo(0, 0);
+        }
+
+        // Step 1: Participant
+        async function handleParticipantSubmit(e) {
+            e.preventDefault();
+            const userId = document.getElementById('userId').value.trim();
+            
+            // Start with first task in sequence
+            currentTaskIndex = 0;
+            cognitiveLoadLevel = TASK_SEQUENCE[currentTaskIndex];
+
+            try {
+                const response = await fetch(`${API_BASE}/participant/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        userId,
+                        age: document.getElementById('age').value || null,
+                        gender: document.getElementById('gender').value,
+                        educationLevel: document.getElementById('educationLevel').value,
+                        typingHabits: document.getElementById('typingHabits').value,
+                        professionalTyping: false
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(`Registration failed: ${response.status} ${error}`);
+                }
+
+                participantData = {
+                    userId,
+                    age: document.getElementById('age').value,
+                    gender: document.getElementById('gender').value,
+                    educationLevel: document.getElementById('educationLevel').value,
+                    typingHabits: document.getElementById('typingHabits').value,
+                    cognitiveLoadLevel
+                };
+
+                // Setup dual-task based on cognitive load level
+                setupDualTask(cognitiveLoadLevel);
+
+                // Start typing session
+                const sessionResponse = await fetch(`${API_BASE}/typing-session/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        userId,
+                        taskType: 'fixed_text',
+                        textPrompt: typingPrompt
+                    })
+                });
+
+                if (!sessionResponse.ok) {
+                    const error = await sessionResponse.text();
+                    throw new Error(`Session start failed: ${sessionResponse.status} ${error}`);
+                }
+                const sessionResult = await sessionResponse.json();
+                sessionData.sessionId = sessionResult.sessionId;
+
+                typingStartTime = Date.now();
+                keystrokes = [];
+                goToStep(2);
+            } catch (err) {
+                console.error('Participant registration error:', err);
+                showMessage(`Error: ${err.message}. Make sure the backend is running at http://localhost:5000`, true);
+            }
+        }
+
+        // Step 2: Typing
+        function handleKeyDown(e) {
+            if (!typingStartTime) typingStartTime = Date.now();
+
+            const timestamp = Date.now() - typingStartTime;
+            
+            keystrokes.push({
+                key: e.key,
+                keyCode: e.keyCode,
+                code: e.code,
+                timestamp: timestamp,
+                ctrlKey: e.ctrlKey,
+                shiftKey: e.shiftKey,
+                altKey: e.altKey,
+                type: 'keydown',
+                textLength: document.getElementById('typingInput').value.length
+            });
+        }
+
+        function handleKeyUp(e) {
+            const timestamp = Date.now() - typingStartTime;
+            
+            keystrokes.push({
+                key: e.key,
+                keyCode: e.keyCode,
+                code: e.code,
+                timestamp: timestamp,
+                type: 'keyup',
+                textLength: document.getElementById('typingInput').value.length
+            });
+        }
+
+        function updateTypingStats() {
+            const typedText = document.getElementById('typingInput').value;
+            const prompt = typingPrompt;
+
+            // Accuracy
+            const matches = typedText.split('').filter((char, i) => char === prompt[i]).length;
+            const accuracy = prompt.length > 0 ? ((matches / prompt.length) * 100).toFixed(1) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+
+            // WPM
+            const words = typedText.split(' ').length;
+            const seconds = typingStartTime ? (Date.now() - typingStartTime) / 1000 : 0;
+            const wpm = seconds > 0 ? ((words / seconds) * 60).toFixed(1) : 0;
+            document.getElementById('wpm').textContent = wpm;
+
+            // Duration
+            const duration = seconds > 0 ? seconds.toFixed(1) : 0;
+            document.getElementById('duration').textContent = duration + 's';
+
+            // Keystrokes
+            document.getElementById('keystrokeCount').textContent = keystrokes.length;
+        }
+
+        function clearTyping() {
+            document.getElementById('typingInput').value = '';
+            typingStartTime = Date.now();
+            keystrokes = [];
+            updateTypingStats();
+        }
+
+        function calculateKeystrokeFeatures() {
+            /**
+             * Calculate keystroke dynamics features matching the notebook requirements:
+             * - Hold Time (H.x): D1U1 - time key is pressed
+             * - Flight Time: D1U2, D1D2, U1D2, U1U2
+             * - Pause duration and frequency
+             * - Error/correction rates (backspace usage)
+             * - Typing speed (CPM, WPM)
+             */
+            
+            const features = {
+                holdTimes: [],
+                flightTimes: {
+                    D1U2: [], // keydown to next keyup
+                    D1D2: [], // keydown to next keydown
+                    U1D2: [], // keyup to next keydown
+                    U1U2: []  // keyup to next keyup
+                },
+                pauses: [],
+                backspaceCount: 0,
+                totalKeystrokes: keystrokes.length,
+                errorCorrections: 0
+            };
+
+            // Group keystrokes by pairs (down/up)
+            const keystrokePairs = [];
+            for (let i = 0; i < keystrokes.length; i++) {
+                const ks = keystrokes[i];
+                
+                // Track backspace/delete for error corrections
+                if (ks.type === 'keydown' && (ks.key === 'Backspace' || ks.key === 'Delete')) {
+                    features.backspaceCount++;
+                    features.errorCorrections++;
+                }
+
+                // Find matching keyup for each keydown
+                if (ks.type === 'keydown') {
+                    for (let j = i + 1; j < keystrokes.length; j++) {
+                        if (keystrokes[j].type === 'keyup' && keystrokes[j].keyCode === ks.keyCode) {
+                            const holdTime = keystrokes[j].timestamp - ks.timestamp;
+                            features.holdTimes.push(holdTime);
+                            keystrokePairs.push({
+                                keydown: ks,
+                                keyup: keystrokes[j],
+                                holdTime: holdTime
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Calculate flight times
+            for (let i = 0; i < keystrokePairs.length - 1; i++) {
+                const current = keystrokePairs[i];
+                const next = keystrokePairs[i + 1];
+
+                // D1U2: current keydown to next keyup
+                features.flightTimes.D1U2.push(next.keyup.timestamp - current.keydown.timestamp);
+                
+                // D1D2: current keydown to next keydown
+                features.flightTimes.D1D2.push(next.keydown.timestamp - current.keydown.timestamp);
+                
+                // U1D2: current keyup to next keydown
+                features.flightTimes.U1D2.push(next.keydown.timestamp - current.keyup.timestamp);
+                
+                // U1U2: current keyup to next keyup
+                features.flightTimes.U1U2.push(next.keyup.timestamp - current.keyup.timestamp);
+
+                // Detect pauses (U1D2 > 500ms is considered a pause)
+                const pauseTime = next.keydown.timestamp - current.keyup.timestamp;
+                if (pauseTime > 500) {
+                    features.pauses.push(pauseTime);
+                }
+            }
+
+            // Calculate statistics
+            const calcStats = (arr) => {
+                if (arr.length === 0) return { mean: 0, std: 0, min: 0, max: 0 };
+                const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+                const std = Math.sqrt(arr.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / arr.length);
+                return {
+                    mean: mean,
+                    std: std,
+                    min: Math.min(...arr),
+                    max: Math.max(...arr)
+                };
+            };
+
+            return {
+                holdTime: calcStats(features.holdTimes),
+                flightTime_D1U2: calcStats(features.flightTimes.D1U2),
+                flightTime_D1D2: calcStats(features.flightTimes.D1D2),
+                flightTime_U1D2: calcStats(features.flightTimes.U1D2),
+                flightTime_U1U2: calcStats(features.flightTimes.U1U2),
+                pauses: {
+                    count: features.pauses.length,
+                    ...calcStats(features.pauses)
+                },
+                errorMetrics: {
+                    backspaceCount: features.backspaceCount,
+                    errorCorrections: features.errorCorrections,
+                    correctionRate: features.totalKeystrokes > 0 
+                        ? (features.errorCorrections / features.totalKeystrokes) 
+                        : 0
+                },
+                totalKeystrokes: features.totalKeystrokes
+            };
+        }
+
+        function clearTyping() {
+            document.getElementById('typingInput').value = '';
+            typingStartTime = Date.now();
+            keystrokes = [];
+            updateTypingStats();
+        }
+
+        async function handleTypingSubmit(e) {
+            e.preventDefault();
+            const typedText = document.getElementById('typingInput').value;
+
+            if (!typedText.trim()) {
+                showMessage('Please type something before submitting', true);
+                return;
+            }
+
+            // Validate dual-task answer if applicable
+            if (cognitiveLoadLevel !== 'Low') {
+                const dualTaskAnswer = document.getElementById('dualTaskInput').value.trim();
+                if (!dualTaskAnswer) {
+                    showMessage('Please complete the secondary task before submitting', true);
+                    return;
+                }
+                dualTaskData.answer = dualTaskAnswer;
+                
+                // Check if answer is correct (for analysis purposes)
+                if (dualTaskData.type === 'number_sequence') {
+                    dualTaskData.isCorrect = (dualTaskAnswer === dualTaskData.data);
+                } else if (dualTaskData.type === 'logic_puzzle') {
+                    dualTaskData.isCorrect = (dualTaskAnswer.toLowerCase().trim() === dualTaskData.correctAnswer.toLowerCase().trim());
+                }
+            }
+
+            try {
+                const duration = typingStartTime ? (Date.now() - typingStartTime) / 1000 : 0;
+                
+                // Calculate keystroke features
+                const keystrokeFeatures = calculateKeystrokeFeatures();
+
+                const response = await fetch(`${API_BASE}/typing-session/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        sessionId: sessionData.sessionId,
+                        typedText,
+                        keystrokes,
+                        keystrokeFeatures,  // Include extracted features
+                        duration,
+                        cognitiveLoadLevel,  // Include cognitive load level
+                        dualTaskData  // Include dual-task data
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(`Submission failed: ${response.status} ${error}`);
+                }
+
+                sessionData.typedText = typedText;
+                sessionData.duration = duration;
+                sessionData.keystrokeCount = keystrokes.length;
+                sessionData.cognitiveLoadLevel = cognitiveLoadLevel;
+                sessionData.dualTaskData = dualTaskData;
+                
+                // Store completed session
+                completedSessions.push({
+                    sessionId: sessionData.sessionId,
+                    cognitiveLoadLevel: cognitiveLoadLevel,
+                    duration: duration
+                });
+                
+                // Auto-export data after each task
+                await autoExportData();
+
+                goToStep(3);
+            } catch (err) {
+                console.error('Typing submission error:', err);
+                showMessage(`Error: ${err.message}. Make sure the backend is running at http://localhost:5000`, true);
+            }
+        }
+        
+        async function autoExportData() {
+            try {
+                const response = await fetch(`${API_BASE}/export/keystroke-features-csv`, {
+                    mode: 'cors'
+                });
+                if (response.ok) {
+                    console.log('✓ Data auto-exported to CSV');
+                }
+            } catch (err) {
+                console.warn('Auto-export warning:', err);
+            }
+        }
+
+        function updateOverallScore() {
+            const values = [
+                parseInt(document.getElementById('mentalDemand').value) || 0,
+                parseInt(document.getElementById('physicalDemand').value) || 0,
+                parseInt(document.getElementById('temporalDemand').value) || 0,
+                parseInt(document.getElementById('performance').value) || 0,
+                parseInt(document.getElementById('effort').value) || 0,
+                parseInt(document.getElementById('frustration').value) || 0
+            ];
+            const average = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(1);
+            document.getElementById('overallScore').textContent = average + ' / 100';
+        }
+
+        // Step 3: NASA-TLX
+        async function handleNasaTLXSubmit(e) {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(`${API_BASE}/nasa-tlx/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        sessionId: sessionData.sessionId,
+                        userId: participantData.userId,
+                        mentalDemand: parseInt(document.getElementById('mentalDemand').value),
+                        physicalDemand: parseInt(document.getElementById('physicalDemand').value),
+                        temporalDemand: parseInt(document.getElementById('temporalDemand').value),
+                        performance: parseInt(document.getElementById('performance').value),
+                        effort: parseInt(document.getElementById('effort').value),
+                        frustration: parseInt(document.getElementById('frustration').value)
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(`NASA-TLX submission failed: ${response.status} ${error}`);
+                }
+
+                showMessage('NASA-TLX submitted successfully!', false);
+                
+                // Check if more tasks remaining
+                currentTaskIndex++;
+                if (currentTaskIndex < TASK_SEQUENCE.length) {
+                    // More tasks to complete
+                    await startNextTask();
+                } else {
+                    // All tasks completed - show summary
+                    showAllTasksSummary();
+                    goToStep(4);
+                }
+            } catch (err) {
+                console.error('NASA-TLX submission error:', err);
+                showMessage(`Error: ${err.message}`, true);
+            }
+        }
+        
+        async function startNextTask() {
+            cognitiveLoadLevel = TASK_SEQUENCE[currentTaskIndex];
+            
+            // Update progress indicator
+            document.getElementById('currentTaskNumber').textContent = currentTaskIndex + 1;
+            const taskLabels = {
+                'Low': 'Low Load (Baseline)',
+                'Medium': 'Medium Load (Memory Task)',
+                'High': 'High Load (Logic Puzzle)'
+            };
+            document.getElementById('currentTaskLabel').textContent = taskLabels[cognitiveLoadLevel];
+            
+            // Setup new dual-task
+            setupDualTask(cognitiveLoadLevel);
+            
+            // Generate new typing prompt
+            typingPrompt = TYPING_PROMPTS[Math.floor(Math.random() * TYPING_PROMPTS.length)];
+            document.getElementById('promptText').textContent = typingPrompt;
+            
+            // Reset typing area
+            document.getElementById('typingInput').value = '';
+            document.getElementById('dualTaskInput').value = '';
+            keystrokes = [];
+            typingStartTime = null;
+            updateTypingStats();
+            
+            // Reset NASA-TLX form
+            document.getElementById('nasaTLXForm').reset();
+            document.getElementById('mentalDemand').value = 50;
+            document.getElementById('physicalDemand').value = 50;
+            document.getElementById('temporalDemand').value = 50;
+            document.getElementById('performance').value = 50;
+            document.getElementById('effort').value = 50;
+            document.getElementById('frustration').value = 50;
+            updateOverallScore();
+            
+            // Start new session
+            try {
+                const sessionResponse = await fetch(`${API_BASE}/typing-session/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        userId: participantData.userId,
+                        taskType: 'fixed_text',
+                        textPrompt: typingPrompt
+                    })
+                });
+                
+                if (!sessionResponse.ok) {
+                    throw new Error('Failed to start new session');
+                }
+                
+                const sessionResult = await sessionResponse.json();
+                sessionData = sessionResult;
+                
+                showMessage(`Starting Task ${currentTaskIndex + 1} of 3: ${taskLabels[cognitiveLoadLevel]}`, false);
+                goToStep(2);
+            } catch (err) {
+                console.error('Error starting next task:', err);
+                showMessage('Error starting next task. Please refresh the page.', true);
+            }
+        }
+        
+        function showAllTasksSummary() {
+            const tasksList = document.getElementById('tasksList');
+            if (tasksList) {
+                tasksList.innerHTML = completedSessions.map((session, index) => `
+                    <li style="padding: 0.5rem; margin: 0.5rem 0; background: #f8f9fa; border-radius: 5px;">
+                        <strong>Task ${index + 1}:</strong> ${session.cognitiveLoadLevel} Load - 
+                        Duration: ${session.duration.toFixed(1)}s - 
+                        Session ID: ${session.sessionId}
+                    </li>
+                `).join('');
+            }
+
+            // Build summary for current task
+                const summary = `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Participant:</strong> ${participantData.userId}<br>
+                        <strong>Latest Session ID:</strong> ${sessionData.sessionId}<br>
+                        <strong>Latest Duration:</strong> ${sessionData.duration.toFixed(1)}s<br>
+                        <strong>Total Tasks Completed:</strong> ${completedSessions.length}
+                    </div>
+                `;
+
+                document.getElementById('summaryContent').innerHTML = summary;
+                
+                const summarySessionId = document.getElementById('summarySessionId');
+                if (summarySessionId) {
+                    summarySessionId.textContent = sessionData.sessionId;
+                }
+        }
+
+        function resetApp() {
+            document.getElementById('messageBox').innerHTML = '';
+            document.getElementById('participantForm').reset();
+            document.getElementById('typingForm').reset();
+            document.getElementById('nasaTLXForm').reset();
+            
+            // Generate new user ID for new participant
+            generateUserId();
+            
+            // Reset multi-task tracking
+            currentTaskIndex = 0;
+            completedSessions = [];
+            
+            participantData = {};
+            sessionData = {};
+            typingStartTime = null;
+            keystrokes = [];
+            typingPrompt = TYPING_PROMPTS[Math.floor(Math.random() * TYPING_PROMPTS.length)];
+            document.getElementById('promptText').textContent = typingPrompt;
+
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>
