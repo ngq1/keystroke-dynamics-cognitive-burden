@@ -1,0 +1,15 @@
+.gitignore
+node_modules/
+__pycache__/
+*.pyc
+.env
+.venv
+*.db
+dist/
+build/
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+keystroke_data.db
