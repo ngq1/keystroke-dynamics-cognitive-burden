@@ -1,0 +1,25 @@
+name: Build Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: frontend
+
+      - name: Build project
+        run: npm run build
+        working-directory: frontend
