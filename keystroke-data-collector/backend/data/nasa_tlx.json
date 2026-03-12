@@ -185,5 +185,38 @@
     "effort": 38,
     "frustration": 30,
     "created_at": "2026-03-04T18:40:04.696065"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773131731.878297",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 18,
+    "physicalDemand": 8,
+    "temporalDemand": 25,
+    "performance": 79,
+    "effort": 17,
+    "frustration": 19,
+    "created_at": "2026-03-10T10:50:09.411372"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773132711.836671",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 34,
+    "physicalDemand": 18,
+    "temporalDemand": 37,
+    "performance": 75,
+    "effort": 34,
+    "frustration": 16,
+    "created_at": "2026-03-10T11:08:40.413084"
+  },
+  {
+    "sessionId": "user_1773138855712_4aelrj8cz_session_1773133743.690242",
+    "userId": "user_1773138855712_4aelrj8cz",
+    "mentalDemand": 27,
+    "physicalDemand": 32,
+    "temporalDemand": 40,
+    "performance": 61,
+    "effort": 37,
+    "frustration": 44,
+    "created_at": "2026-03-10T11:27:29.664371"
   }
 ]
